@@ -60,7 +60,7 @@ class PhotoGalleryTest extends TestCase
         $response = $this->get('/about');
 
         $response->assertStatus(200);
-        $response->assertSee('UTS REKAYASA WEB');
+        $response->assertSee('Lensa Alam Indonesia');
         $response->assertSee('Galeri Fotografi Alam');
     }
 
@@ -76,3 +76,4 @@ class PhotoGalleryTest extends TestCase
         }
     }
 }
+
