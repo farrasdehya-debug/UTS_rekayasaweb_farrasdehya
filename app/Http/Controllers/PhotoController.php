@@ -62,3 +62,4 @@ class PhotoController extends Controller
         return view('about', compact('totalPhotos', 'categoriesCount', 'photographersCount'));
     }
 }
+

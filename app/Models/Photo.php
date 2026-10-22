@@ -18,3 +18,4 @@ class Photo extends Model
         'description',
     ];
 }
+
