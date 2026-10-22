@@ -1,146 +1,157 @@
 # Lensa Alam - Galeri Fotografi Alam Indonesia
-### Proyek Ujian Tengah Semester (UTS) Rekayasa Web
 
-Aplikasi web frontend berbasis **Laravel** dan **Bootstrap** yang menyajikan galeri kurasi karya fotografi alam, lanskap megah nusantara, keanekaragaman flora & fauna, serta fenomena geologis Indonesia.
-
-Proyek ini dikembangkan dengan arsitektur container **Laravel Sail & Docker** sesuai petunjuk dan ketentuan penugasan UTS Rekayasa Web.
+Aplikasi web galeri fotografi alam yang menyajikan kurasi foto lanskap pegunungan, pesona bahari, satwa liar, dan fenomena geologis nusantara. Dibangun menggunakan **Laravel** dan **Bootstrap 5**, aplikasi ini mengedepankan desain visual modern yang responsif, bersih, dan berfokus pada pengalaman eksplorasi foto.
 
 ---
 
-## 📌 Ketentuan Penugasan (NIM Digit Terakhir: 1)
+## 🎨 Fungsi & Tampilan Antarmuka (User Interface)
 
-| Spesifikasi | Ketentuan Soal | Implementasi Proyek |
-| :--- | :--- | :--- |
-| **Tema** | Galeri Fotografi Alam (NIM 1) | Galeri Foto Lanskap & Alam Nusantara |
-| **Nama Tabel** | `photos` | Tabel `photos` via Laravel Migration |
-| **Kolom Tabel** | `id`, `title`, `location`, `photographer`, `image`, `category`, `description` | Sesuai dengan tipe data yang tepat dan timestamps |
-| **Penyimpanan Gambar** | `public/assets/images/` | Tersimpan di `public/assets/images/` resolusi tinggi |
-| **Sumber Data** | Wajib berasal dari Seeder | `database/seeders/PhotoSeeder.php` |
-| **Styling & Framework** | Blade Template + Bootstrap | Blade layout inheritance & Bootstrap 5.3 + Bootstrap Icons |
-| **Struktur Minimal** | Halaman daftar, halaman detail, navigasi | Lengkap + fitur pencarian & filter kategori dinamis |
+### 1. Struktur Layout & Navigasi Global (`layouts/app.blade.php`)
+- **Responsive Sticky Navbar**: Navigasi atas yang melayang dengan efek *backdrop blur (glassmorphism)* bertema warna alam (*deep forest green*).
+- **Indikator Halaman Aktif**: Menu yang sedang dikunjungi diberi sorotan (*highlight*) secara otomatis.
+- **Identitas Visual Galeri**: Tipografi elegan menggunakan kombinasi font *Plus Jakarta Sans* untuk keterbacaan teks dan *Playfair Display* untuk judul editorial fotografi.
+- **Footer Responsif**: Bagian bawah halaman memuat ringkasan identitas galeri dan hak cipta.
 
 ---
 
-## 🚀 Fitur Utama Aplikasi
-
-1. **Struktur Layout Blade Terpusat (`layouts/app.blade.php`)**:
-   - Struktur navbar responsif dengan link aktif dan brand logo bertema alam.
-   - Menggunakan Bootstrap 5.3 CDN dan Bootstrap Icons.
-   - Tipografi elegan kombinasi *Playfair Display* & *Plus Jakarta Sans*.
-   - Footer informatif dengan metadata penugasan.
-
-2. **Halaman Daftar / Galeri Foto (`photos/index.blade.php`)**:
-   - Hero banner bertema fotografi alam.
-   - Fitur pencarian langsung berdasarkan judul, lokasi, deskripsi, atau fotografer.
-   - Filter pill kategori interaktif (*Semua, Lanskap Pegunungan, Bahari & Lautan, Satwa Liar, Fenomena Alam, dsb.*).
-   - Kartu Bootstrap responsif (*cards & grid*) dengan efek zoom halus, tag kategori, nama fotografer, pin lokasi, dan tombol menuju detail.
-   - *Empty state* yang ramah jika pencarian tidak menemukan hasil.
-
-3. **Halaman Detail Foto (`photos/show.blade.php`)**:
-   - Navigasi breadcrumbs dinamis (*Beranda > Kategori > Judul Foto*).
-   - Tampilan foto beresolusi tinggi dengan informasi path aset `public/assets/images/`.
-   - Kartu info fotografer dan lokasi pengambilan gambar.
-   - Deskripsi naratif lengkap karya foto.
-   - Tabel metadata teknis foto (ID, nama file, kategori, tanggal kurasi).
-   - Tombol kembali ke galeri dan filter kategori langsung.
-   - Bagian **Koleksi Foto Terkait** dalam kategori yang sama.
-
-4. **Halaman Tentang Galeri (`about.blade.php`)**:
-   - Dokumentasi proyek UTS Rekayasa Web, tema NIM 1, dan daftar pemenuhan kriteria penilaian.
+### 2. Halaman Galeri & Katalog Foto (`photos/index.blade.php`)
+- **Hero Banner Imersif**: Bagian pembuka dengan latar belakang visual alam dan pengantar kurasi fotografi.
+- **Pencarian Real-Time (Search Bar)**: Formulir pencarian cepat untuk memfilter foto berdasarkan:
+  - Judul foto
+  - Lokasi pengambilan gambar
+  - Nama fotografer
+  - Kata kunci dalam deskripsi
+  - Dilengkapi tombol reset/clear instan.
+- **Filter Kategori (Category Pills)**: Filter sekali klik untuk menyortir foto berdasarkan kategori:
+  - *Semua*
+  - *Lanskap Pegunungan*
+  - *Bahari & Lautan*
+  - *Satwa Liar*
+  - *Lanskap Air*
+  - *Hutan & Flora*
+  - *Fenomena Alam*
+- **Grid Kartu Foto Responsif (Cards Grid)**:
+  - Tata letak kartu 3 kolom (desktop), 2 kolom (tablet), dan 1 kolom (mobile).
+  - Efek hover interaktif dengan *smooth image zoom* dan bayangan elevasi (*card shadow*).
+  - Badge kategori melayang (*floating badge*) di atas gambar.
+  - Ringkasan informasi: judul, ikon penanda lokasi, fotografer, cuplikan deskripsi, dan tombol navigasi ke halaman detail.
+- **Empty State**: Tampilan ilustrasi dan pesan informatif yang ramah jika pencarian atau filter kategori tidak menemukan hasil foto.
 
 ---
 
-## 🛠️ Panduan Menjalankan Proyek dengan Laravel Sail
+### 3. Halaman Detail Foto (`photos/show.blade.php`)
+- **Navigasi Breadcrumbs**: Jalur navigasi terstruktur (*Beranda > Kategori > Judul Foto*) yang mempermudah pengguna kembali ke level halaman sebelumnya.
+- **Tampilan Foto Resolusi Tinggi**: Preview foto berukuran besar dengan tombol aksi *"Buka Gambar Penuh"*.
+- **Informasi Lokasi & Fotografer**: Kartu informasi terpisah dengan ikon visual untuk memperjelas lokasi pengambilan dan nama fotografer.
+- **Deskripsi Naratif Karya**: Ulasan mendalam mengenai cerita dan latar belakang di balik momen pemotretan.
+- **Tabel Metadata Teknis**: Rincian teknis meliputi:
+  - ID Foto
+  - Nama file aset gambar
+  - Kategori alam
+  - Waktu kurasi / unggah
+- **Aksi Navigasi Cepat**: Tombol kembali ke galeri utama dan tombol untuk menjelajahi karya lain dalam kategori yang sama.
+- **Koleksi Foto Terkait (Related Photos)**: Rekomendasi otomatis 3 foto lain yang berada dalam satu kategori dengan foto yang sedang dilihat.
 
-### 1. Menjalankan Container Docker
+---
 
-Pastikan Docker Desktop aktif di komputer Anda, lalu jalankan perintah:
+### 4. Halaman Tentang Galeri (`about.blade.php`)
+- **Ringkasan Profil**: Pengenalan mengenai tujuan kurasi fotografi Lensa Alam Indonesia.
+- **Statistik Galeri**: Tiga kartu indikator statistik yang menampilkan:
+  - Jumlah total foto terkurasi
+  - Jumlah variasi kategori alam
+  - Jumlah fotografer yang berkontribusi
+- **Tombol Pintas**: Akses langsung kembali ke halaman galeri utama.
+
+---
+
+## 📁 Struktur Direktori & Folder
+
+```text
+UTS_rekayasaweb_farrasdehya/
+├── app/
+│   ├── Http/
+│   │   └── Controllers/
+│   │       ├── Controller.php
+│   │       └── PhotoController.php          # Mengatur logika katalog, detail, pencarian, dan filter
+│   └── Models/
+│       └── Photo.php                        # Model Eloquent untuk data foto
+│
+├── database/
+│   ├── migrations/
+│   │   └── 2026_10_22_000001_create_photos_table.php  # Skema tabel foto (judul, lokasi, fotografer, gambar, dsb.)
+│   └── seeders/
+│       ├── DatabaseSeeder.php               # Pemanggil seeder utama
+│       └── PhotoSeeder.php                  # Data awal (dummy) 9 koleksi foto alam lengkap dengan metadata
+│
+├── public/
+│   ├── assets/
+│   │   └── images/                          # Direktori penyimpanan file gambar aset foto alam
+│   │       ├── bromo-sunrise.jpg            # Foto Lanskap Gunung Bromo
+│   │       ├── raja-ampat.jpg               # Foto Bahari Kepulauan Misool Raja Ampat
+│   │       ├── komodo-dragon.jpg            # Foto Satwa Liar Komodo
+│   │       ├── tumpak-sewu.jpg              # Foto Lanskap Air Terjun Tumpak Sewu
+│   │       ├── orangutan-sumatra.jpg        # Foto Satwa Liar Orangutan Sumatra
+│   │       ├── kawah-ijen.jpg               # Foto Fenomena Alam Kawah Ijen
+│   │       ├── danau-toba.jpg               # Foto Lanskap Danau Toba
+│   │       ├── hutan-de-djawatan.jpg        # Foto Hutan Trembesi De Djawatan
+│   │       └── labuan-bajo-sunset.jpg       # Foto Bahari Senja Labuan Bajo
+│   └── index.php                            # Entry point aplikasi Laravel
+│
+├── resources/
+│   └── views/
+│       ├── layouts/
+│       │   └── app.blade.php                # Master template: Navbar Bootstrap, Head, Google Fonts, & Footer
+│       ├── photos/
+│       │   ├── index.blade.php              # View katalog: Hero section, search, filter pill, grid card
+│       │   └── show.blade.php               # View detail foto: Breadcrumbs, preview besar, metadata, foto terkait
+│       └── about.blade.php                  # View informasi tentang galeri & indikator statistik
+│
+├── routes/
+│   └── web.php                              # Definisi routing web (/, /photos/{photo}, /about)
+│
+├── tests/
+│   └── Feature/
+│       └── PhotoGalleryTest.php             # Automated feature tests untuk validasi seluruh endpoint UI
+│
+├── compose.yaml                             # Konfigurasi container Docker & Laravel Sail (App + MySQL)
+└── .env                                     # Konfigurasi environment (PORT, DB, APP_NAME)
+```
+
+---
+
+## 🚀 Panduan Menjalankan Aplikasi
+
+Aplikasi berjalan di lingkungan container menggunakan **Laravel Sail** (Docker).
+
+### 1. Menyalakan Container
+Pastikan Docker Desktop aktif di komputer Anda, kemudian jalankan:
 
 ```bash
 ./vendor/bin/sail up -d
 ```
 
-> **Catatan Port:**
-> Aplikasi web berjalan di: **`http://localhost:8000`**  
-> Database MySQL berjalan di port: **`3306`**
+Aplikasi dapat diakses melalui browser di:
+- **Galeri Foto:** [http://localhost:8000](http://localhost:8000)
+- **Detail Foto:** [http://localhost:8000/photos/1](http://localhost:8000/photos/1)
+- **Tentang Galeri:** [http://localhost:8000/about](http://localhost:8000/about)
 
-### 2. Menjalankan Migration & Seeder
-
-Jalankan perintah berikut untuk mengeksekusi migration tabel `photos` dan mengisikan data seeder:
+### 2. Migrasi Database & Seeder
+Untuk membuat tabel dan menginjeksi data foto:
 
 ```bash
 ./vendor/bin/sail artisan migrate --seed
 ```
 
-Atau jika ingin me-refresh dan mengisi ulang:
-
-```bash
-./vendor/bin/sail artisan migrate:fresh --seed
-```
-
-### 3. Mengakses Aplikasi Web
-
-Buka browser dan kunjungi:
-- **Halaman Galeri (Daftar Foto):** [http://localhost:8000/](http://localhost:8000/)
-- **Halaman Detail Foto:** [http://localhost:8000/photos/1](http://localhost:8000/photos/1)
-- **Halaman Tentang Galeri:** [http://localhost:8000/about](http://localhost:8000/about)
-
-### 4. Menjalankan Automated Test (Pengujian)
-
-Aplikasi telah dilengkapi unit & feature test otomatis (PHPUnit). Untuk mengujinya:
+### 3. Pengujian Otomatis (Testing)
+Untuk memastikan seluruh rute UI dan aset berjalan normal:
 
 ```bash
 ./vendor/bin/sail artisan test
 ```
 
-### 5. Menghentikan Container
-
-Jika selesai menggunakan:
+### 4. Menghentikan Container
+Jika selesai menggunakan aplikasi:
 
 ```bash
 ./vendor/bin/sail down
-```
-
----
-
-## 📁 Struktur Direktori Penting
-
-```text
-├── app/
-│   ├── Http/Controllers/
-│   │   └── PhotoController.php          # Logika daftar, detail, filter, & search
-│   └── Models/
-│       └── Photo.php                    # Model Eloquent Photo
-├── database/
-│   ├── migrations/
-│   │   └── 2026_10_22_000001_create_photos_table.php  # Definisi tabel photos
-│   └── seeders/
-│       ├── DatabaseSeeder.php           # Pemanggil seeder utama
-│       └── PhotoSeeder.php              # Data dummy galeri fotografi alam
-├── public/
-│   └── assets/
-│       └── images/                      # Lokasi wajib penyimpanan file gambar
-│           ├── bromo-sunrise.jpg
-│           ├── raja-ampat.jpg
-│           ├── komodo-dragon.jpg
-│           ├── tumpak-sewu.jpg
-│           ├── orangutan-sumatra.jpg
-│           ├── kawah-ijen.jpg
-│           ├── danau-toba.jpg
-│           ├── hutan-de-djawatan.jpg
-│           └── labuan-bajo-sunset.jpg
-├── resources/
-│   └── views/
-│       ├── layouts/
-│       │   └── app.blade.php            # Master Blade layout & Bootstrap
-│       ├── photos/
-│       │   ├── index.blade.php          # View daftar foto (grid, cards, filter)
-│       │   └── show.blade.php           # View detail foto & foto terkait
-│       └── about.blade.php              # View informasi proyek UTS
-├── routes/
-│   └── web.php                          # Rute aplikasi web
-├── tests/
-│   └── Feature/
-│       └── PhotoGalleryTest.php         # Automated feature test
-└── compose.yaml                         # Konfigurasi Docker / Laravel Sail
 ```
